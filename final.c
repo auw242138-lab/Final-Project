@@ -2,9 +2,10 @@
 #include <string.h>
 
 int main() {
-
+    int num;
+    for ( num=1; num<4; num++){
     char name[50];
-    char movies[6][50] = {"Spider Man", "Batman", "Barbie", "Openhaimer", "Harry Potter", "Avatar"};
+    char movies[6][50]= {"Ava", "Batman", "Barbie", "Openhaimer", "Homeless", "Avatar"};
      for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 6 - i - 1; j++) {
             if (strcmp(movies[j], movies[j + 1]) > 0) {
@@ -20,43 +21,51 @@ int main() {
 
     int ticketprice[6] = {500, 600, 440, 190, 170, 140};
 
-    int min=ticketprice[0];
-    int max=ticketprice[0];
+    int min=0;
+    int max=0;
     for (int i=0; i<6; i++)
     {
-        if (ticketprice[i] < min){
-            min = ticketprice[i];
+        if (ticketprice[i] < ticketprice[min]){
+            ticketprice[min] = ticketprice[i];
+            }
+        if (ticketprice[i] > ticketprice[max]){
+            ticketprice[max] = ticketprice[i];
+            } }
             printf("\n\nCheapest Available Movie: %s (Prcie: %d)", movies[min], min);
-        }
-        if (ticketprice[i] > max){
-            max = ticketprice[i];
-            printf("\nMost Expensive Available Movie: %s (Prcie: %d)", movies[max], max); }}
+            printf("Most Expensive Available Movie: %s (Prcie: %d)\n", movies[max], max);
 
 
-    char viral [3][50] = {"Spider Man", "Batman", "Barbie"};
+    char viral [3][50] = {"Ava", "Batman", "Barbie"};
     int found = 0;
     while (!found) {
         printf("\nEnter Movie Name: ");
         scanf("%s", name);
         for (int i = 0; i < 6; i++) {
             if (strcmp(name, movies[i]) == 0) {
+
                 int numticket;
                 printf("Enter Number of Tickets: ");
                 scanf("%d",&numticket);
+                if (numticket>5){
+                    printf("Sold Out!");
+                    break;
+                }
+
+
+
+
                 if (strcmp(viral[i],movies[i])==0){
                     ticketprice[i] = (ticketprice[i] + (ticketprice[i]*10/100)) * numticket;
-                    printf("Available.\nTicket Price: %d (Viral Movie! 10 percent increase) \n", ticketprice[i]);
+                    printf("Available.\nTicket Price: %d (Viral Movie! 10 percent increase)", ticketprice[i]);
                 }
                 else {printf("Available.\nTicket Price: %d \n",(ticketprice[i] * numticket));}
 
                 found = 1;
-                break; }
-        }
+                break; }}
 
         if (!found) {
             printf("Not Available. Please try again.\n");
         } }
 
     return 0;
-}
-
+}}
